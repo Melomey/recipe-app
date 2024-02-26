@@ -1,27 +1,41 @@
-import { Card, CardActionArea, CardContent, CardMedia, Container, Grid, TextField } from "@mui/material";
 
+import { Card, CardActionArea, CardContent, CardMedia, Container, Grid, TextField } from "@mui/material";
+import RecipeItem from "../../components/recipe-item";
+import { useState, useEffect } from "react";
 
 
 export default function Recipes() {
-    return (
-       <Container sx={{my: '2rem'}} maxWidth="sm">
-        <TextField
-         fullWidth id="outlined-basic" 
-         label="Enter a keyword to search recipe and hit Enter" 
-         variant="outlined" />
+   const [recipes, setRecipes] = useState([]);
 
-         <Grid sx={{ mt: '1rem'}} container spacing={3}>
-         <Grid item x5={4}>
-            <Card>
-             
-              <CardMedia
-              sx= {{height: 140}}
-              image="https://images.unsplash.com/photo-1708361089093-beef4c4584e7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHx8"/>
-             
-            </Card>
-            <CardContent variant="h5">Recipe Name</CardContent>
+   const searchRecipes = () => {
+      //prepare url
+      const url = new URL('https://api.spoonacular.com/recipes/complexSearch');
+      url.searchParams.append('apiKey', '1d5d6d5cc15a47cd84dd4b89094a58c3');
+      // fetch recipes
+      fetch(url)
+         .then((response) => response.json())
+         .then((data) => {
+            // Update the recipes state
+            setRecipes(data.results);
+            // console.log(data);
+         })
+         .catch((error) => {
+            console.log(error);
+         })
+   }
+
+   useEffect(searchRecipes, []);
+
+   return (
+      <Container sx={{ my: '2rem' }} >
+         <TextField
+            fullWidth id="outlined-basic"
+            label="Enter a keyword to search recipe and hit Enter"
+            variant="outlined" />
+
+         <Grid sx={{ mt: '1rem' }} container spacing={3}>
+            {recipes.map((recipe) => <RecipeItem key={recipe.id} title={recipe.title} image={recipe.image} />)}
          </Grid>
-         </Grid>
-       </Container>
-    );
+      </Container>
+   );
 }
