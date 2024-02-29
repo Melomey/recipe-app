@@ -44,7 +44,7 @@ export default function Recipes() {
 
          <Grid sx={{ mt: '1rem' }} container spacing={3}>
             {loading ? (<Container sx={{display: 'flex', justifyContent: 'center'}}> <img src={spinner} width="25%" alt="" /> </Container>
-            ): recipes.length > 0 ? recipes.map((recipe) => <RecipeItem key={recipe.id} title={recipe.title} image={recipe.image} />) : (
+            ): recipes.length > 0 ? recipes.map((recipe) => <RecipeItem key={recipe.id} title={recipe.title} image={recipe.image}  id={recipe.id}/>) : (
                <Container sx={{display: 'flex', justifyContent: 'center'}}><img src={noRecipes} width="25%"/></Container>
             )}
          </Grid>

@@ -1,19 +1,21 @@
-import {Grid, Card, CardMedia, CardContent, Typography} from"@mui/material";
+import { Grid, Card, CardMedia, CardContent, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
-export default function RecipeItem({title, image}) {
+export default function RecipeItem({ title, image, id }) {
     return (
         <Grid item x5={4}>
-            <Card sx={{ maxWidth: 345, height: '100%'}}>
+            <Card sx={{ maxWidth: 345, height: '100%' }}>
                 <CardMedia
                     sx={{ height: 140 }}
                     image={image}
                     title="green iguana"
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {title}
-                    </Typography>
-
+                    <Link to={`/recipes/${id}`}> 
+                     <Typography gutterBottom variant="h5" component="div">
+                        {title}
+                         </Typography>
+                    </Link>
                 </CardContent>
 
             </Card>
