@@ -18,14 +18,14 @@ const getRecipe = (...args) => {
 export default function Recipe() {
 const {id} = useParams();
 
-const {data: recipe, isLoading} = useSWR(`https://api.spoonacular.com/recipes/${id}/information`, getRecipe);
+const {data: recipe, isLoading} = useSWR(`http://localhost:4000/recipes/${id}`, getRecipe);
 
 console.log(recipe, isLoading);
 
 
     return (
     <>
-    {isLoading? <img src={spinner}/> : (
+    {isLoading ? <img src={spinner}/> : (
         <Container>
         <h1>{recipe.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: recipe.summary}}/>
