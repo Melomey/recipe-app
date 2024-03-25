@@ -2,6 +2,7 @@ import { Container } from "@mui/material";
 import { useParams } from "react-router-dom"
 import useSWR from "swr";
 import spinner from "../../assets/images/bouncing-circles.svg"
+import Navbar from "../../components/navbar";
 
 
 
@@ -25,6 +26,7 @@ console.log(recipe, isLoading);
 
     return (
     <>
+    <Navbar/>
     {isLoading ? <img src={spinner}/> : (
         <Container>
         <h1>{recipe.title}</h1>
