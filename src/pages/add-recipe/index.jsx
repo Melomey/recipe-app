@@ -17,21 +17,28 @@ export default function AddRecipe() {
     const [open, setOpen] = useState(false);
 
     const addRecipe = async (event) => {
+        //set loading to true
         setLoading(true);
         // Prevent default form submit behavior
         event.preventDefault();
         // Get form data
         const formData = new FormData(event.target);
+
         // Post form data to the backend
-        const response = await fetch(`${process.env.REACT_APP_RECIPE_API}/recipes`, {
+        const response = await fetch (`http://localhost:4000/recipes`, {
             method: 'POST',
             body: formData,
         });
-        if (response.status === 201) {
-            const data = await response.json();
-            console.log(data);
-            setOpen(true);
-        }
+        console.log(response)
+        // const response = await fetch(`${process.env.REACT_APP_RECIPE_API}/recipes`, {
+        //     method: 'POST',
+        //     body: formData,
+        // });
+        // if (response.status === 201) {
+        //     const data = await response.json();
+        //     console.log(data);
+        //     setOpen(true);
+        // }
         setLoading(false);
     }
 
